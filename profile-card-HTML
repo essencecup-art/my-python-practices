@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>profile card</title>
+    <meta
+      name="description"
+      content="A profile card is a visual representation of an individual's personal information"
+    />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <article class="profile-card">
+      <img
+        class="avatar"
+        src="https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?w=150"
+        alt="Profile"
+      />
+      <h2>Fake reim</h2>
+      <p>skill areas</p>
+      <div class="skill-container">
+        <span class="skill"
+          >css:Mastered the Box Model, custom borders, and responsive design
+          systems. Currently building modern card interfaces using Flexbox
+          components.</span
+        >
+        <span class="skill"
+          >html:Proficient in creating semantic HTML structures and implementing
+          accessibility best practices.</span
+        >
+        <span class="skill"
+          >javascript:Experienced in developing interactive web applications
+          with modern JavaScript features.</span
+        >
+        <span class="skill"
+          >jjs:Skilled in using Node.js for server-side development and building
+          scalable backend services.</span
+        >
+        <span class="skill"
+          >python:Competent in using Python for data analysis, automation, and
+          backend development.</span
+        >
+      </div>
+    </article>
+  </body>
+</html>
