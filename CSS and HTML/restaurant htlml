@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mock restaurant</title>
+    <link rel="stylesheet" href="restaurant.css" />
+  </head>
+  <body>
+    <header class="main-header">
+      <nav class="navbar">
+        <div class="main-title">
+          <h1>Pizza 4p's</h1>
+        </div>
+
+        <ul class="nav-links">
+          <li><a href="#">Home</a></li>
+          <li><a href="#menu">Our Menu</a></li>
+          <li><a href="#">Our Story</a></li>
+          <li><a href="#">Locations</a></li>
+        </ul>
+      </nav>
+    </header>
+    <section class="hero-section">
+      <div class="hero-content">
+        <h2 class="hero-title">
+          Delivering Happiness,<br />One Pizza at a Time
+        </h2>
+        <p class="hero-subtitle">Welcome to Pizza 4P's</p>
+        <a href="#" class="hero-btn">View Our Menu</a>
+      </div>
+    </section>
+    <section class="story-section">
+      <div class="story-image">
+        <img
+          src="https://images.unsplash.com/photo-1551183053-bf91a1d81141?w=800"
+          alt="Making fresh burrata cheese"
+        />
+      </div>
+
+      <div class="story-content">
+        <span class="section-subtitle">Our Philosophy</span>
+        <h2>Earth to People</h2>
+        <p>
+          At Pizza 4P's, we believe in delivering wow and sharing happiness. Our
+          signature house-made burrata cheese is crafted daily from organic,
+          local milk, bringing a sustainable farm-to-table experience right to
+          your plate.
+        </p>
+      </div>
+    </section>
+    <h2 class="best-sell">Our best seller</h2>
+    <div class="menu-wrapper" id="menu">
+      <article class="menu-card">
+        <img
+          src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600"
+          alt="Burrata Pizza"
+        />
+        <div class="card-meta">
+          <h3>Burrata Parma Ham</h3>
+          <span class="price">295k</span>
+        </div>
+        <p class="description">
+          House-made fresh Burrata cheese, premium sliced Parma ham, fresh
+          arugula.
+        </p>
+      </article>
+
+      <article class="menu-card">
+        <img
+          src="https://images.unsplash.com/photo-1574071318508-1cdbab80d002?w=600"
+          alt="4 Cheese"
+        />
+        <div class="card-meta">
+          <h3>4-Cheese Pizza</h3>
+          <span class="price">220k</span>
+        </div>
+        <p class="description">
+          A rich blend of Mozzarella, Parmesan, Camembert, and blue cheese
+          served with organic honey.
+        </p>
+      </article>
+
+      <article class="menu-card">
+        <img
+          src="https://images.unsplash.com/photo-1593560708920-61dd98c46a4e?w=600"
+          alt="Teriyaki Pizza"
+        />
+        <div class="card-meta">
+          <h3>Teriyaki Chicken</h3>
+          <span class="price">195k</span>
+        </div>
+        <p class="description">
+          Tender chicken breast in savory teriyaki sauce with shredded nori and
+          scallions.
+        </p>
+      </article>
+    </div>
+  </body>
+</html>
