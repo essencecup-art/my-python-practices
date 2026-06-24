@@ -1,0 +1,62 @@
+from flask import Flask, render_template, request, redirect
+from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
+
+app = Flask(__name__)
+app.config['SQLALCHEMY_DATABASE_URI'] =  'sqlite:///post.db'
+db = SQLAlchemy(app)
+
+class BlogPost(db.Model):
+    id = db.Column(db.Integer, primary_key = True)
+    title = db.Column(db.String(100), nullable= False)
+    contents = db.Column(db.String(1000), nullable = False)
+    authors = db.Column(db.String(30), default = 'N/A', nullable = False)
+    dateposted = db.Column(db.DateTime, nullable = False, default = datetime.now)
+
+    def __repr__(self):
+        return f' blog post {self.id} '
+    
+
+@app.route('/')
+def helo():
+    return render_template('index.html')
+
+@app.route('/posts', methods = ['GET','POST'])
+def posts():
+    if request.method == 'POST':
+        post_title = request.form['title']
+        post_content = request.form['content']
+        post_author = request.form['author']
+        new_post = BlogPost(title= post_title, contents = post_content, authors = post_author)
+        db.session.add(new_post)
+        db.session.commit()
+        return redirect('/posts')
+    else:
+        all_posts = BlogPost.query.all()
+        return render_template('post.html',posts= all_posts)
+
+@app.route('/posts/delete/<int:id>')
+def delete(id):
+    post = db.session.get(BlogPost, id)
+    if post:
+        db.session.delete(post)
+        db.session.commit()
+    return redirect('/posts')
+
+@app.route('/posts/edit/<int:id>',methods =['GET','POST'])
+def edit(id):
+    if request.method == 'POST':
+        post = db.session.get(BlogPost, id)
+        post.title = request.form['title']
+        post.contents = request.form['content']
+        post.authors = request.form['author']
+        db.session.commit()
+        return redirect('/posts')
+    else:
+        post = db.session.get(BlogPost, id)
+        return render_template('edit.html', posts = post)
+    
+
+
+if __name__ == "__main__":
+    app.run(debug=True)
