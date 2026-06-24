@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block head %} <title>Menu</title> {% endblock %}
+
+{% block body %} 
+<h1> Menu </h1>
+    {% for dish in menu %}
+        <h2> {{ dish.dish_name }} </h2>
+        <p> price: {{ dish.pricing / 100}} </p>
+        <p> category: {{dish.category}} </p>
+        <form class="add-form" action="/menu/add/{{ dish.id }}" method="POST">
+            <button type="submit">Add to cart</button>
+        </form>
+    {% endfor %}
+
+        <script>
+            const add = document.querySelectorAll('.add-form')
+            add.forEach((add_to_cart) =>{
+                add_to_cart.addEventListener('submit',runEvent);
+            })
+            function runEvent(e){
+                e.preventDefault()
+                url = e.target.action
+                fetch(url,{method:'POST'}).then((response)=>{
+                    return response.json()
+                }).catch((err)=>{
+                    console.log('error',err)
+                })
+            }
+        </script>
+{% end block %}

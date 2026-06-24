@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Checkout | Secure Payment</title>
+    <style>
+      body {
+        font-family: "Arial", sans-serif;
+        background: #f4f4f9;
+        color: #333;
+        padding: 20px;
+      }
+      .container {
+        max-width: 500px;
+        margin: 0 auto;
+        background: white;
+        padding: 30px;
+        border-radius: 8px;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      }
+      h2 {
+        margin-top: 0;
+        color: #222;
+      }
+      .form-group {
+        margin-bottom: 20px;
+      }
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+      input[type="text"],
+      input[type="tel"] {
+        width: 100%;
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-sizing: border-box;
+      }
+      .radio-group {
+        display: flex;
+        gap: 15px;
+        margin-top: 5px;
+      }
+      .btn {
+        width: 100%;
+        background: #007bff;
+        color: white;
+        border: none;
+        padding: 12px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: bold;
+      }
+      .btn:disabled {
+        background: #cccccc;
+        cursor: not-allowed;
+      }
+      /* QR Code Area hidden by default */
+      #payment-window {
+        display: none;
+        text-align: center;
+        margin-top: 20px;
+        padding-top: 20px;
+        border-top: 2px dashed #ddd;
+      }
+      #qr-image {
+        max-width: 250px;
+        margin: 15px 0;
+        border: 1px solid #eee;
+        padding: 10px;
+        background: white;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <div id="checkout-form-section">
+        <h2>Delivery & Payment</h2>
+        <form id="checkout-form" action="/create_payment" method="POST">
+          <div class="form-group">
+            <label for="fullname">Full Name</label>
+            <input
+              type="text"
+              id="fullname"
+              name="fullname"
+              placeholder="John Doe"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="phone">Phone Number</label>
+            <input
+              type="tel"
+              id="phone"
+              name="phone"
+              placeholder="0901234567"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="address">Delivery Address</label>
+            <input
+              type="text"
+              id="address"
+              name="address"
+              placeholder="123 Main St, District 1"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label>Payment Method</label>
+            <div class="radio-group">
+              <label
+                ><input
+                  type="radio"
+                  name="payment_method"
+                  value="vietqr"
+                  checked
+                />
+                Bank Transfer (VietQR)</label
+              >
+              <label
+                ><input type="radio" name="payment_method" value="cod" /> Cash
+                on Delivery</label
+              >
+            </div>
+          </div>
+
+          <button type="submit" id="submit-btn" class="btn">Place Order</button>
+        </form>
+      </div>
+
+      <div id="payment-window">
+        <h2>Scan to Pay</h2>
+        <p>
+          Please open your banking app or e-wallet to scan the QR code below to
+          complete your payment.
+        </p>
+
+        <img id="qr-image" src="" alt="Dynamic VietQR Payment Code" />
+
+        <p><strong>Status:</strong> Waiting for payment...</p>
+      </div>
+    </div>
+
+    <script>
+      const form = document.getElementById("checkout-form");
+      form.addEventListener("submit", (runEvent) => {
+        data = new FormData(form);
+        fetch("/create-payment", {
+          method: "POST",
+          body: data,
+        }).then((response) => {
+          return response.json();
+        }).then((data) => {
+            console.log("here is what pythong send back", data);
+            if (data.method === 'cod'){
+                alert(data.message)
+            }
+            else if ( data.method === 'vietqr'){
+                document.getElementById('qr-image').src= data.code_url;
+                document.getElementById('payment-window').style.display = 'block'
+
+            }
+        })
+      });
+    </script>
+  </body>
+</html>
